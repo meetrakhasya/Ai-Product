@@ -1,0 +1,5 @@
+{
+  "name": "AI Poster Fusion",
+  "description": "An interactive poster designing application that uses AI to remove backgrounds, generate creative posters from product images and concepts, and allows for iterative editing and final poster collection.",
+  "requestFramePermissions": []
+}
