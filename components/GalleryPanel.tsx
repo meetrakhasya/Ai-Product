@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { DownloadIcon } from './icons/DownloadIcon';
+import { TrashIcon } from './icons/TrashIcon';
 import type { SavedPoster } from '../types';
 import { DownloadModal } from './DownloadModal';
 
 interface GalleryPanelProps {
     savedPosters: SavedPoster[];
-    setSavedPosters: React.Dispatch<React.SetStateAction<SavedPoster[]>>;
+    onClearGallery: () => void;
 }
 
-export const GalleryPanel: React.FC<GalleryPanelProps> = ({ savedPosters, setSavedPosters }) => {
+export const GalleryPanel: React.FC<GalleryPanelProps> = ({ savedPosters, onClearGallery }) => {
     const [downloadingPoster, setDownloadingPoster] = useState<SavedPoster | null>(null);
 
     const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
@@ -37,7 +38,19 @@ export const GalleryPanel: React.FC<GalleryPanelProps> = ({ savedPosters, setSav
                 onDrop={handleDrop}
                 onDragOver={handleDragOver}
             >
-                <h2 className="text-2xl font-bold text-cyan-400 border-b-2 border-cyan-400/20 pb-2 mb-4">Gallery</h2>
+                <div className="flex justify-between items-center border-b-2 border-cyan-400/20 pb-2 mb-4">
+                    <h2 className="text-2xl font-bold text-cyan-400">Gallery</h2>
+                    {savedPosters.length > 0 && (
+                        <button 
+                            onClick={onClearGallery} 
+                            className="flex items-center gap-1 text-sm text-red-400 hover:text-red-300 transition-colors"
+                            title="Clear all posters from the gallery"
+                        >
+                            <TrashIcon className="w-4 h-4" />
+                            Clear
+                        </button>
+                    )}
+                </div>
                 <div className="flex-grow overflow-y-auto pr-2 -mr-2">
                     {savedPosters.length === 0 ? (
                         <div className="h-full flex items-center justify-center text-center text-gray-500 border-2 border-dashed border-gray-600 rounded-lg">

@@ -125,6 +125,10 @@ const App: React.FC = () => {
         }
     }, [savedPosters]);
 
+    const handleClearGallery = useCallback(() => {
+        setSavedPosters([]);
+    }, []);
+
     const handleProductImagesChange = (files: File[]) => {
         setProductImages(files);
         setCurrentPoster(null); // Reset canvas
@@ -180,7 +184,7 @@ const App: React.FC = () => {
                     />
                 </div>
                 <div className="lg:col-span-3">
-                    <GalleryPanel savedPosters={savedPosters} setSavedPosters={setSavedPosters} />
+                    <GalleryPanel savedPosters={savedPosters} onClearGallery={handleClearGallery} />
                 </div>
             </main>
         </div>
